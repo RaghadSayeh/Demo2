@@ -1,0 +1,47 @@
+model small
+.code
+
+;control register
+
+mov dx ,0313h
+mov al ,82h
+out dx,al
+
+mov cl,0  ;clean lcd
+
+l1:mov al,' '
+int 0ah
+inc cl
+cmp cl ,16
+jnz l1
+
+
+
+
+lp:
+mov dx,0311h
+in al,dx
+mov bl ,8 
+mul bl
+mov bl ,255
+div bl
+mov ah ,0
+
+
+
+mov dl,al
+mov al,ah
+mul bl
+mov bl,255
+div bl
+
+mov bl,al
+mov al,dl
+mov cl,8
+add al,30h
+int 0ah
+
+
+
+jmp lp
+end
